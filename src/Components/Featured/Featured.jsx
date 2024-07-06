@@ -11,6 +11,8 @@ const Featured = () => {
         .then(res => res.json())
         .then(data => setJobs(data))
     },[])
+
+    const [dataLength, seDataLength] = useState(4)
     
     return (
        <div className="flex justify-center">
@@ -21,9 +23,12 @@ const Featured = () => {
             </div>
             <div className="grid grid-cols-2 gap-[70px]">
                 {
-                    jobs.map(job => <Job key={job.id} job={job} ></Job>)
+                    jobs.slice(0, dataLength).map(job => <Job key={job.id} job={job} ></Job>)
                 }
             </div>
+            <div className={`flex justify-center mt-6 ${dataLength === jobs.length && 'hidden'}`}>
+    <button onClick={()=> seDataLength(jobs.length)} className="text-white text-xl font-extrabold px-7 py-[19px] bg-gradient-to-r from-indigo-400 to-violet-500 rounded-lg  ">See All Jobs</button>
+</div>
         </div>
        </div>
     );
