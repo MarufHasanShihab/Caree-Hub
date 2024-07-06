@@ -3,6 +3,9 @@ import bg1 from '../../assets/images/bg1.png';
 import { FaPhoneVolume } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { IoLocation } from "react-icons/io5";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { saveLocalStorage } from "../../Utility/localStroage";
 
 
 
@@ -11,7 +14,10 @@ const JobDetails = () => {
     const jobs = useLoaderData();
     const {id} = useParams();
     const job = jobs.find(job => job.id === parseInt(id));
-    const {job_description, job_responsibility, educational_requirements, experiences, salary, job_title, contact_information} = job
+    const {job_description, job_responsibility, educational_requirements, experiences, salary, job_title, contact_information} = job;
+    const handleApplyJob = ()=>{
+        saveLocalStorage(parseInt(id))
+    }
     return (
         <div className="pb-10">
             <div className="w-full h-[400px] bg-gray-200 flex justify-center items-center  relative">
@@ -52,12 +58,13 @@ const JobDetails = () => {
                 <IoLocation className="text-[45px]"/>
                 <h4><span className="text-zinc-700 text-xl font-bold font-['Manrope']">Phone</span><span className="text-zinc-700 text-xl font-extrabold font-['Manrope']"> :</span><span className="text-neutral-500 text-xl font-semibold font-['Manrope']"> </span><span className="text-neutral-500 text-xl font-medium font-['Manrope']">{contact_information.address}</span></h4>
                 </div>
-                <div className=" mt-2 py-3 px-4 bg-gradient-to-r from-indigo-400 to-violet-500 rounded-lg justify-start items-center gap-2.5 inline-flex">
+                <div onClick={handleApplyJob} className=" mt-2 py-3 px-4 bg-gradient-to-r from-indigo-400 to-violet-500 rounded-lg justify-start items-center gap-2.5 inline-flex">
     <button className="text-white text-[18px] font-extrabold">Apply Now</button>
 </div>
                 </div>
                 </div>
             </div>
+            <ToastContainer/>
         </div>
     );
 };
