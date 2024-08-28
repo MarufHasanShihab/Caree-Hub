@@ -12,6 +12,9 @@ import Statistics from './Components/Statistics/Statistics';
 import AppliedJobs from './Components/AppliedJobs/AppliedJobs';
 import Blog from './Components/Blog/Blog';
 import JobDetails from './Components/JobDetails/JobDetails';
+import Login from './Components/Login/Login';
+import Register from './Components/Register/Register';
+import AuthProvider from './provider/AuthProvider';
 
 const router = createBrowserRouter([
   {
@@ -39,6 +42,14 @@ const router = createBrowserRouter([
         path: 'job/:id',
         element: <JobDetails></JobDetails>,
         loader: ()=> fetch('../public/jobs.json')
+      },
+      {
+        path: "/login",
+        element: <Login/>
+      },
+      {
+        path: "/register",
+        element: <Register/>
       }
     ],
   },
@@ -46,6 +57,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <AuthProvider>
     <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>,
 )
