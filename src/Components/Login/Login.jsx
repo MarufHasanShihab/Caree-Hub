@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unknown-property */
 
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import { useState } from "react";
@@ -10,11 +10,17 @@ const Login = () => {
     const {signInUser} = useAuth()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const navigate = useNavigate()
+    const location = useLocation()
+    console.log(location)
 
     const hanleSignIn = e=>{
         e.preventDefault()
         signInUser(email, password)
-        .then(()=>toast.success("user login sucessfully!"))
+        .then(()=>{
+            toast.success("user login sucessfully!")
+            location.state ? navigate(location.state) : navigate("/")
+        })
         .catch(error => toast.error(error.code.split("/").join(" ")))
     }
 

@@ -15,6 +15,7 @@ import JobDetails from './Components/JobDetails/JobDetails';
 import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
 import AuthProvider from './provider/AuthProvider';
+import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
 
 const router = createBrowserRouter([
   {
@@ -40,7 +41,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'job/:id',
-        element: <JobDetails></JobDetails>,
+        element: <PrivateRoute><JobDetails></JobDetails></PrivateRoute>,
         loader: ()=> fetch('../public/jobs.json')
       },
       {

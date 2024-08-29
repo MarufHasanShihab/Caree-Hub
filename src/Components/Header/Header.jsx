@@ -10,7 +10,7 @@ const Header = () => {
         logoutUser()
         .then(()=>{
             toast.success("User logged out")
-            setUser({});
+            setUser(null);
         })
         .catch(error => toast.error(error.message))
     }
@@ -25,7 +25,7 @@ const Header = () => {
             </nav>
             <div className=" px-3 py-[12px] bg-gradient-to-r from-indigo-400 to-violet-500 rounded-lg justify-start items-start gap-2.5 inline-flex cursor-pointer">
             <Link to="/login">{
-                user.email ? <button onClick={handleLogout} className="text-white text-[18px] font-extrabold ">Logout</button>:<button className="text-white text-[18px] font-extrabold ">Login</button>
+                user ? <button onClick={handleLogout} className="text-white text-[18px] font-extrabold ">Logout</button>:<button className="text-white text-[18px] font-extrabold ">Login</button>
             }</Link>
 </div>
         </div>
